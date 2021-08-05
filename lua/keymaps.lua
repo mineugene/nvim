@@ -13,9 +13,9 @@ local keymaps_n = {
   ['\\'] = "<Cmd>split<CR><Cmd>exe 'resize '.(winheight(0)*3/5)<CR><Cmd>terminal<CR>",
   ["<Leader>h"] = "<Cmd>nohls<CR>",
   -- telescope
-  ["gd"] = "<Cmd>Telescope lsp_definitions<CR>",
-  ["gi"] = "<Cmd>Telescope lsp_implementations<CR>",
-  ["gr"] = "<Cmd>Telescope lsp_references<CR>",
+  ["<Leader>gd"] = "<Cmd>Telescope lsp_definitions<CR>",
+  ["<Leader>gi"] = "<Cmd>Telescope lsp_implementations<CR>",
+  ["<Leader>gr"] = "<Cmd>Telescope lsp_references<CR>",
   ["<Leader>ff"] = "<Cmd>lua require('post.telescope').ls()<CR>",
   ["<Leader>fb"] = "<Cmd>Telescope buffers<CR>",
   ["<Leader>fg"] = "<Cmd>Telescope live_grep<CR>",
