@@ -21,6 +21,14 @@ g.equalalways = false
 g.expandtab = true
 g.formatoptions = "jq"
 g.gdefault = true
+g.guicursor = table.concat({
+  "n-v-c-sm:block",
+  "n-v-c-sm:blinkwait700-blinkon400-blinkoff250",
+  "i-ci-ve:ver25",
+  "i-ci-ve:blinkwait700-blinkon400-blinkoff250",
+  "r-cr-o:hor20",
+  "r-cr-o:blinkwait700-blinkon400-blinkoff250",
+}, ',')
 g.hidden = true
 g.hlsearch = true
 g.incsearch = true
