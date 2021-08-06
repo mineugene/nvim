@@ -63,7 +63,8 @@ my_config = {
     "jsonls",          -- jsonls
     "pyright",         -- pyright
     "sumneko_lua",     -- https://github.com/sumneko/lua-language-server/wiki
-    "vimls"            -- vim-language-server
+    "tsserver",        -- typescript, typescript-language-server
+    "vimls",           -- vim-language-server
   },
   ls_setup_args = {
     on_attach = on_attach
