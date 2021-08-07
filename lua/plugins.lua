@@ -86,6 +86,17 @@ return require("packer").startup({
       config = function() require("post.telescope").config() end
     }
 
+    --[[ neoformat
+    -- Auto-formatter that selects from a variety of formatters depending on the
+    --   filetype of the current buffer.
+    -- See `autoload/neoformat/formatters/{filetype}.vim` for configuration.
+    ]]--
+    use {
+      "sbdchd/neoformat",
+      opt = true,
+      cmd = "Neoformat"
+    }
+
     --[[ vim-gitgutter
     -- Shows a git diff in the sign column. Previews, stages, and
     --   undo's individual hunks; and stages partial hunks.
