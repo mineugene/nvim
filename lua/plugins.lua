@@ -60,6 +60,13 @@ return require("packer").startup({
       end,
     })
 
+    -- lsp installer
+    use({
+      "kabouzeid/nvim-lspinstall",
+      opt = true,
+      cmd = "LspInstall",
+    })
+
     -- standalone lua language server
     use({
       "sumneko/lua-language-server",
