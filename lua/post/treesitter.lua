@@ -3,13 +3,12 @@
 -- Last modified:  (2021-Jul-29)
 -- Description:    contains list of treesitter configurations to update and
 --   setup on loaded.
-]]--
-
+]]
 
 local Config = {}
 --[[ my_config(.ts_setup)
 -- ts_setup: arguments to pass into setup call.
-]]--
+]]
 local my_config = {
   ts_setup = {
     ensure_installed = {
@@ -23,16 +22,15 @@ local my_config = {
       "lua",
       "python",
       "tsx",
-      "typescript"
+      "typescript",
     },
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false
+      additional_vim_regex_highlighting = false,
     },
-    matchup = { enable=true }
-  }
+    matchup = { enable = true },
+  },
 }
-
 
 function Config:create(o)
   o = o or {}
@@ -50,6 +48,4 @@ function Config:create(o)
   return o
 end
 
-
 return Config:create(my_config)
-

@@ -1,14 +1,12 @@
 --[[
 -- File name:      lua/options.lua
 -- Description:    https://vimhelp.org/options.txt.html
-]]--
-
+]]
 
 local o = vim.opt_local
 local g = vim.opt_global
 
-
---[[ GLOBAL ]]--
+--[[ GLOBAL ]]
 g.background = "light"
 g.backup = false
 g.cmdheight = 1
@@ -28,14 +26,15 @@ g.guicursor = table.concat({
   "i-ci-ve:blinkwait700-blinkon400-blinkoff250",
   "r-cr-o:hor20",
   "r-cr-o:blinkwait700-blinkon400-blinkoff250",
-}, ',')
+}, ",")
 g.hidden = true
 g.hlsearch = true
 g.incsearch = true
 g.laststatus = 2
+-- stylua: ignore
 g.path = ".,/usr/include,**"   -- recursive find (**)
 g.shiftwidth = 2
-g.shortmess:append('c')
+g.shortmess:append("c")
 g.showcmd = true
 g.showmode = true
 g.smartcase = true
@@ -43,6 +42,7 @@ g.smartindent = true
 g.softtabstop = 2
 g.splitbelow = true
 g.splitright = true
+-- stylua: ignore
 g.statusline = table.concat({
   "[%n] ",                                     -- buffer number
   "%<%f ",                                     -- truncate point & filename
@@ -57,8 +57,7 @@ g.termguicolors = true
 g.updatetime = 200
 g.wildmenu = true
 
-
---[[ LOCAL ]]--
+--[[ LOCAL ]]
 o.colorcolumn = "81"
 o.complete = ".,w,b,u,t,i"
 o.expandtab = true
@@ -72,13 +71,9 @@ o.softtabstop = 2
 o.tabstop = 2
 o.wrap = true
 
-
---[[ FILETYPE ]]--
+--[[ FILETYPE ]]
 vim.api.nvim_command("au FileType python setl ts=4 sw=4 sts=4 et")
-vim.api.nvim_command(
-  "au FileType javascript,cucumber,html,css setl ts=2 sw=2 sts=2 et"
-)
+vim.api.nvim_command("au FileType javascript,cucumber,html,css setl ts=2 sw=2 sts=2 et")
 
---[[ LOCAL FORMATOPTIONS ]]--
+--[[ LOCAL FORMATOPTIONS ]]
 vim.api.nvim_command("au BufNewFile,BufReadPre * setl fo-=cro")
-

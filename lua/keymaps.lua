@@ -6,11 +6,10 @@
 --   post-configuation lua files (lua/post/).
 --]]
 
-
-local DEFAULT_OPTS = { silent=true, noremap=true }
+local DEFAULT_OPTS = { silent = true, noremap = true }
 local keymaps_n = {
   -- normal
-  ['\\'] = "<Cmd>split<CR><Cmd>exe 'resize '.(winheight(0)*3/5)<CR><Cmd>terminal<CR>",
+  ["\\"] = "<Cmd>split<CR><Cmd>exe 'resize '.(winheight(0)*3/5)<CR><Cmd>terminal<CR>",
   ["<Leader>h"] = "<Cmd>nohls<CR>",
   -- telescope
   ["<Leader>gd"] = "<Cmd>Telescope lsp_definitions<CR>",
@@ -22,10 +21,8 @@ local keymaps_n = {
   ["<Leader>fh"] = "<Cmd>Telescope help_tags<CR>",
 }
 
+vim.g.mapleader = " "
 
-vim.g.mapleader = ' '
-
-for cmd,map in pairs(keymaps_n) do
-  vim.api.nvim_set_keymap('n', cmd, map, DEFAULT_OPTS)
+for cmd, map in pairs(keymaps_n) do
+  vim.api.nvim_set_keymap("n", cmd, map, DEFAULT_OPTS)
 end
-

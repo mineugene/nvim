@@ -2,8 +2,8 @@
 -- File name:      lua/post/telescope.lua
 -- Last modified:  (2021-Aug-03)
 -- Description:    telescope configuation settings and customized methods.
-]]--
-
+]]
+--
 
 local Config = {}
 -- see :h telescope.setup
@@ -23,32 +23,31 @@ local my_config = {
       horizontal = {
         mirror = false,
         preview_cutoff = 160,
-        prompt_position = "bottom"
-      }
+        prompt_position = "bottom",
+      },
     },
     file_ignore_patterns = {
-      "node_modules"
+      "node_modules",
     },
-    borderchars = { '─','│','─','│','┌','┐','┘','└' },
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     path_display = {},
     set_env = {
-      ["COLORTERM"] = "truecolor"
+      ["COLORTERM"] = "truecolor",
     },
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new
+    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
   },
   pickers = {
     buffers = {
       sort_lastused = true,
       mappings = {
-        i = { ["<C-d>"]="delete_buffer" },
-        n = { ["<C-d>"]="delete_buffer" }
-      }
-    }
-  }
+        i = { ["<C-d>"] = "delete_buffer" },
+        n = { ["<C-d>"] = "delete_buffer" },
+      },
+    },
+  },
 }
-
 
 function Config:create(o)
   o = o or {}
@@ -60,8 +59,7 @@ function Config:create(o)
 
   o.ls = function()
     local builtin = require("telescope.builtin")
-    if os.execute("git rev-parse --is-inside-work-tree 1>/dev/null 2>&1") == 0
-    then
+    if os.execute("git rev-parse --is-inside-work-tree 1>/dev/null 2>&1") == 0 then
       return builtin.git_files()
     end
     return builtin.find_files()
@@ -70,6 +68,4 @@ function Config:create(o)
   return o
 end
 
-
 return Config:create(my_config)
-
