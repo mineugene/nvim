@@ -6,7 +6,6 @@
 ]]
 
 local Config = {}
-local shell = vim.env.SHELL -- tested with /bin/bash
 
 function Config:create(o)
   o = o or {}
