@@ -162,6 +162,21 @@ return require("packer").startup({
       ft = { "html" },
     })
 
+    -- commentstring setter on CursorHold events
+    use({
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      opt = true,
+      ft = {
+        "css",
+        "handlebars",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "scss",
+        "typescript",
+        "typescriptreact",
+      },
+    })
     --[[ which-key
     -- A command legend in the form of a popup. It shows suggestions to
     --   complete a key binding. Also shows marks and register contents.
