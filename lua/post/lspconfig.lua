@@ -94,6 +94,24 @@ my_config = {
         },
       },
     },
+    ["tailwindcss"] = {
+      filetypes = {
+        "django-html",
+        "handlebars",
+        "html",
+        "markdown",
+        "css",
+        "less",
+        "postcss",
+        "sass",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+      },
+    },
   },
 }
 
