@@ -48,7 +48,7 @@ local on_attach = function(_, bufnr)
 end
 
 --[[ my_config(.ls_config | .ls_setup_args | .ls_setup_except)
--- ls_config:          language servers to setup
+-- ls_config:          manually installed language servers to setup
 -- ls_setup_args:      default arguments to pass to all setup calls
 -- ls_setup_except:    custom arguments to pass to a setup call
 ]]
