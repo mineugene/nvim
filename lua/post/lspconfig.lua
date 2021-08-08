@@ -105,14 +105,10 @@ function Config:create(o)
   o.config = function()
     -- lspinstall
     nvim_lspinstall.setup()
-    local lang_servers = vim.tbl_extend(
-      "keep",
-      o.ls_config,
-      nvim_lspinstall.installed_servers()
-    )
+    vim.list_extend(o.ls_config, nvim_lspinstall.installed_servers())
 
     -- lspconfig
-    for _, ls in ipairs(lang_servers) do
+    for _, ls in ipairs(o.ls_config) do
       local except = o.ls_setup_except[ls] or {}
       local args = vim.tbl_extend("force", o.ls_setup_args, except)
       nvim_lspconfig[ls].setup(args)
