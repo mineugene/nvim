@@ -64,7 +64,7 @@ return require("packer").startup({
     use({
       "kabouzeid/nvim-lspinstall",
       opt = true,
-      cmd = "LspInstall",
+      event = { "BufReadPre", "BufNewFile" },
     })
 
     -- standalone lua language server
