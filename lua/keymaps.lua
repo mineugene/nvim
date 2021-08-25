@@ -1,6 +1,6 @@
 --[[
 -- File name:      lua/keymaps.lua
--- Last modified:  (2021-Aug-02)
+-- Last modified:  (2021-Aug-24)
 -- Description:    keymaps for start plugins are defined here. Keymaps for
 --   opt (lazy-loaded) plugins may also be defined in their respective
 --   post-configuation lua files (lua/post/).

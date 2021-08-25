@@ -1,5 +1,6 @@
 --[[
 -- File name:      lua/options.lua
+-- Last modified:  (2021-Aug-24)
 -- Description:    https://vimhelp.org/options.txt.html
 ]]
 
