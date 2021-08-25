@@ -20,7 +20,7 @@ local keymaps_n = {
   ["<Leader>fg"] = "<Cmd>Telescope live_grep<CR>",
   ["<Leader>fh"] = "<Cmd>Telescope help_tags<CR>",
   -- context-commentstring
-  ["<Leader>gc"] = "<Cmd>lua require('ts_context_commentstring.internal').update_commentstring()<CR>"
+  ["<Leader>gc"] = "<Cmd>lua require('ts_context_commentstring.internal').update_commentstring()<CR>",
 }
 
 vim.g.mapleader = " "
