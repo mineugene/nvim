@@ -54,7 +54,7 @@ return require("packer").startup({
     use({
       "neovim/nvim-lspconfig",
       opt = true,
-      event = { "BufReadPre", "BufNewFile" },
+      after = "nvim-lspinstall",
       config = function()
         require("post.lspconfig").config()
       end,
@@ -65,14 +65,6 @@ return require("packer").startup({
       "kabouzeid/nvim-lspinstall",
       opt = true,
       event = { "BufReadPre", "BufNewFile" },
-    })
-
-    -- standalone lua language server
-    use({
-      "sumneko/lua-language-server",
-      opt = true,
-      ft = { "lua" },
-      run = require("post.lua-language-server").run(),
     })
 
     -- lsp auto-complete

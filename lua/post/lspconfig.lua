@@ -8,8 +8,6 @@
 -- see :h lspconfig
 local nvim_lspconfig = require("lspconfig")
 local nvim_lspinstall = require("lspinstall")
-local sumneko_ls_path = vim.fn.stdpath("data")
-  .. "/site/pack/packer/opt/lua-language-server"
 
 local Config = {}
 local my_config
@@ -62,7 +60,6 @@ my_config = {
     "html",
     "jsonls",
     "pyright",
-    "sumneko_lua",
     "tsserver",
     "vimls",
   },
@@ -74,12 +71,7 @@ my_config = {
       cmd = { "pyright-langserver", "--stdio" },
       filetypes = { "python" },
     },
-    ["sumneko_lua"] = {
-      cmd = {
-        sumneko_ls_path .. "/bin/Linux/lua-language-server",
-        "-E",
-        sumneko_ls_path .. "/main.lua",
-      },
+    ["lua"] = {
       settings = {
         Lua = {
           runtime = {
