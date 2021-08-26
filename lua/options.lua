@@ -34,6 +34,7 @@ g.incsearch = true
 g.laststatus = 2
 -- stylua: ignore
 g.path = ".,/usr/include,**"   -- recursive find (**)
+g.scrolloff = 16
 g.shiftwidth = 2
 g.shortmess:append("c")
 g.showcmd = true
