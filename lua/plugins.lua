@@ -6,7 +6,6 @@
 --]]
 
 --[[ BOOTSTRAP ]]
---
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
@@ -18,7 +17,6 @@ if fn.empty(fn.glob(install_path .. "/start/packer.nvim")) > 0 then
 end
 
 --[[ AUTO-COMPILE ]]
---
 vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
 
 return require("packer").startup({
@@ -75,6 +73,12 @@ return require("packer").startup({
       config = function()
         require("post.compe").config()
       end,
+    })
+
+    use({
+      "davidhalter/jedi-vim",
+      opt = true,
+      ft = { "python" },
     })
 
     --[[ nvim-telescope

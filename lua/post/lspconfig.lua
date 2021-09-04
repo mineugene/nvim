@@ -59,7 +59,7 @@ my_config = {
     "cssls",
     "html",
     "jsonls",
-    "pyright",
+    "pylsp",
     "tsserver",
     "vimls",
   },
@@ -67,10 +67,6 @@ my_config = {
     on_attach = on_attach,
   },
   ls_setup_except = {
-    ["pyright"] = {
-      cmd = { "pyright-langserver", "--stdio" },
-      filetypes = { "python" },
-    },
     ["lua"] = {
       settings = {
         Lua = {
