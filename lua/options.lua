@@ -30,6 +30,7 @@ g.guicursor = table.concat({
 }, ",")
 g.hidden = true
 g.hlsearch = true
+g.ignorecase = true
 g.incsearch = true
 g.laststatus = 2
 -- stylua: ignore
