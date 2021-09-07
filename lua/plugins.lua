@@ -75,6 +75,7 @@ return require("packer").startup({
       end,
     })
 
+    -- python language server
     use({
       "davidhalter/jedi-vim",
       opt = true,
