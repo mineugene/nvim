@@ -8,7 +8,7 @@ local o = vim.opt_local
 local g = vim.opt_global
 
 --[[ GLOBAL ]]
-g.background = "light"
+g.background = "dark"
 g.backup = false
 g.cmdheight = 1
 g.complete = ".,w,b,u,t,i"
