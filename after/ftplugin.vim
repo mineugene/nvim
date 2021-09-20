@@ -21,9 +21,3 @@ augroup LspInfo
   au!
   au FileType lspinfo nnoremap <silent> <buffer> q :q<CR>
 augroup END
-
-" Run formatter on save
-augroup Formatter
-  au!
-  au BufWritePre * Neoformat
-augroup END
