@@ -1,6 +1,5 @@
 --[[
 -- File name:      lua/post/lspconfig.lua
--- Last modified:  (2021-Aug-08)
 -- Description:    post-processes for configuring nvim-lspconfig once it has
 --   been loaded. Servers are listed in the local my_servers table.
 ]]

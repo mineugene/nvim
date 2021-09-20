@@ -1,6 +1,5 @@
 --[[
 -- File name:      lua/post/telescope.lua
--- Last modified:  (2021-Aug-03)
 -- Description:    telescope configuation settings and customized methods.
 ]]
 --

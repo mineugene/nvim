@@ -1,6 +1,5 @@
 --[[
 -- File name:      lua/post/compe.lua
--- Last modified:  (2021-Jul-30)
 -- Description:    configuration of LSP autocomplete on loaded.
 ]]
 

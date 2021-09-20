@@ -1,6 +1,5 @@
 --[[
 -- File name:      lua/plugins.lua
--- Last modified:  (2021-Aug-10)
 -- Description:    bootstrap and setup of the 'packer' plugin manager.
 --   Plugin configuation files are in `lua/post/`.
 --]]

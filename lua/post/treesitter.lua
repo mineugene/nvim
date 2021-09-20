@@ -1,6 +1,5 @@
 --[[
 -- File name:      lua/post/treesitter.lua
--- Last modified:  (2021-Jul-29)
 -- Description:    contains list of treesitter configurations to update and
 --   setup on loaded.
 ]]
