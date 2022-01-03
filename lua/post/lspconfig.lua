@@ -6,7 +6,7 @@
 
 -- see :h lspconfig
 local nvim_lspconfig = require("lspconfig")
-local nvim_lspinstall = require("lspinstall")
+local nvim_lspservers = require("nvim-lsp-installer.servers")
 
 local Config = {}
 local my_config
@@ -66,7 +66,7 @@ my_config = {
     on_attach = on_attach,
   },
   ls_setup_except = {
-    ["lua"] = {
+    ["sumneko_lua"] = {
       settings = {
         Lua = {
           runtime = {
@@ -101,15 +101,19 @@ function Config:create(o)
 
   self.__index = self
   o.config = function()
-    -- lspinstall
-    nvim_lspinstall.setup()
-    vim.list_extend(o.ls_config, nvim_lspinstall.installed_servers())
+    -- append installed language servers using nvim-lsp-installer
+    vim.list_extend(o.ls_config, nvim_lspservers.get_installed_server_names())
 
-    -- lspconfig
     for _, ls in ipairs(o.ls_config) do
       local except = o.ls_setup_except[ls] or {}
       local args = vim.tbl_extend("force", o.ls_setup_args, except)
+      -- lspconfig
       nvim_lspconfig[ls].setup(args)
+      -- lspinstall
+      local _, request = nvim_lspservers.get_server(ls)
+      request:on_ready(function()
+        request:setup(args)
+      end)
     end
   end
 

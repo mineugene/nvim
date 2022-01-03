@@ -51,7 +51,7 @@ return require("packer").startup({
     use({
       "neovim/nvim-lspconfig",
       opt = true,
-      after = "nvim-lspinstall",
+      after = "nvim-lsp-installer",
       config = function()
         require("post.lspconfig").config()
       end,
@@ -59,7 +59,7 @@ return require("packer").startup({
 
     -- lsp installer
     use({
-      "kabouzeid/nvim-lspinstall",
+      "williamboman/nvim-lsp-installer",
       opt = true,
       event = { "BufReadPre", "BufNewFile" },
     })
