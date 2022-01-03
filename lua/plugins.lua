@@ -129,15 +129,6 @@ return require("packer").startup({
       requires = { "glts/vim-magnum" },
     })
 
-    -- markdown previewer with browser
-    use({
-      "iamcco/markdown-preview.nvim",
-      opt = true,
-      ft = { "markdown" },
-      run = "cd app;yarn install",
-      cmd = "MarkdownPreview",
-    })
-
     -- extension to vim `%` command
     use({
       "andymass/vim-matchup",
