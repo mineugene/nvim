@@ -54,13 +54,6 @@ my_config = {
   --   list of all supported configurable LSPs.
   ls_config = {
     "bashls",
-    "clangd",
-    "cssls",
-    "html",
-    "jsonls",
-    "pylsp",
-    "tsserver",
-    "vimls",
   },
   ls_setup_args = {
     on_attach = on_attach,
