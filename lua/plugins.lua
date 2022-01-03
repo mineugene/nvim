@@ -76,7 +76,7 @@ return require("packer").startup({
 
     -- python language server
     use({
-      "davidhalter/jedi-vim",
+      "deoplete-plugins/deoplete-jedi",
       opt = true,
       ft = { "python" },
     })
