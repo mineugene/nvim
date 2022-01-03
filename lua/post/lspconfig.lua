@@ -81,17 +81,6 @@ my_config = {
         },
       },
     },
-    ["tailwindcss"] = {
-      filetypes = {
-        "django-html",
-        "handlebars",
-        "html",
-        "css",
-        "postcss",
-        "sass",
-        "scss",
-      },
-    },
   },
 }
 
