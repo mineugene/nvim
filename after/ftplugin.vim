@@ -21,3 +21,9 @@ augroup LspInfo
   au!
   au FileType lspinfo nnoremap <silent> <buffer> q :q<CR>
 augroup END
+
+let g:neoformat_javascript_prettier = {
+    \ 'exe': './node_modules/.bin/prettier',
+    \ 'args': ['--write', '--config .prettierrc'],
+    \ 'replace': 1
+    \ }
