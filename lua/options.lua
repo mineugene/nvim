@@ -76,7 +76,8 @@ o.wrap = true
 --[[ FILETYPE ]]
 vim.api.nvim_command("au FileType python setl ts=4 sw=4 sts=4 et")
 vim.api.nvim_command("au FileType sh setl ts=4 sw=4 sts=4 et")
-vim.api.nvim_command("au FileType javascript,cucumber,html,css setl ts=2 sw=2 sts=2 et")
+vim.api.nvim_command("au FileType html,css setl ts=4 sw=4 sts=4 et")
+vim.api.nvim_command("au FileType javascript,cucumber setl ts=2 sw=2 sts=2 et")
 
 --[[ LOCAL FORMATOPTIONS ]]
 vim.api.nvim_command("au BufNewFile,BufReadPre * setl fo-=cro")
