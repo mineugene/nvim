@@ -35,7 +35,6 @@ return require("packer").startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       opt = true,
-      branch = "0.5-compat",
       event = "BufReadPost",
       config = function()
         require("post.treesitter").config()
