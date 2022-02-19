@@ -34,7 +34,6 @@ return require("packer").startup({
     ]]
     use({
       "nvim-treesitter/nvim-treesitter",
-      opt = true,
       event = "BufReadPost",
       config = function()
         require("post.treesitter").config()
