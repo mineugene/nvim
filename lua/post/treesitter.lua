@@ -9,20 +9,8 @@ local Config = {}
 -- ts_setup: arguments to pass into setup call.
 ]]
 local my_config = {
-  ts_setup = {
-    ensure_installed = {
-      "bash",
-      "c",
-      "cpp",
-      "css",
-      "html",
-      "javascript",
-      "json",
-      "lua",
-      "python",
-      "tsx",
-      "typescript",
-    },
+  settings = {
+    ensure_installed = "maintained",
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
@@ -42,7 +30,7 @@ function Config:create(o)
   self.__index = self
   o.config = function()
     require("post.treesitter").update()
-    require("nvim-treesitter.configs").setup(o.ts_setup)
+    require("nvim-treesitter.configs").setup(o.settings)
   end
   o.update = function()
     vim.api.nvim_command("TSUpdate")
