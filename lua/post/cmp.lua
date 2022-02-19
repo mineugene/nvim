@@ -4,33 +4,30 @@
 ]]
 
 local Config = {}
---[[ my_config(.co_setup)
--- co_setup: arguments to pass into setup call
+-- see :h cmp
+local cmp = require("cmp")
+--[[ setup_params(.settings)
+-- settings: arguments to pass into setup call
 ]]
-local my_config = {
-  co_setup = {
+local setup_params = {
+  settings = {
     enabled = true,
-    autocomplete = true,
-    preselect = "disable",
-    throttle_time = 64,
-    source_timeout = 96,
-    resolve_timeout = 640,
-    incomplete_delay = 384,
-    max_abbr_width = 96,
-    max_kind_width = 96,
-    max_menu_width = 96,
-    documentation = {
-      max_width = 128,
-      min_width = 64,
-      max_height = math.floor(vim.o.lines * 0.3),
-      min_height = 1,
+    mapping = {
+      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-e>"] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
-    source = {
-      path = true,
-      buffer = true,
-      nvim_lsp = true,
-      nvim_lua = true,
-    },
+    sources = cmp.config.sources({
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+    }, {
+      { name = "buffer" },
+    }),
   },
 }
 
@@ -39,10 +36,10 @@ function Config:create(o)
   setmetatable(o, self)
 
   o.config = function()
-    require("compe").setup(o.co_setup)
+    require("cmp").setup(o.settings)
   end
 
   return o
 end
 
-return Config:create(my_config)
+return Config:create(setup_params)

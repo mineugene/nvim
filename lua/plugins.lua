@@ -55,12 +55,20 @@ return require("packer").startup({
 
     -- lsp auto-complete
     use({
-      "hrsh7th/nvim-compe",
-      opt = true,
-      event = { "BufReadPre", "BufNewFile" },
+      "hrsh7th/nvim-cmp",
       config = function()
-        require("post.compe").config()
+        require("post.cmp").config()
       end,
+      requires = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "saadparwaiz1/cmp_luasnip",
+        "petertriho/cmp-git",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+      },
     })
 
     -- python language server
