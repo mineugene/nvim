@@ -4,15 +4,16 @@
 --   Plugin configuation files are in `lua/post/`.
 --]]
 
---[[ BOOTSTRAP ]]
-local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath("data") .. "/site/pack/packer"
+-- [[ bootstrap package manager ]]
+local packer_loc = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local packer_uri = "https://github.com/wbthomason/packer.nvim"
+local bootstrap_success
 
-if fn.empty(fn.glob(install_path .. "/start/packer.nvim")) > 0 then
-  fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
-  execute("packadd packer.nvim")
+if fn.empty(fn.glob(packer_loc)) > 0 then
+  bootstrap_success = fn.system({ "git", "clone", "--depth", "1", packer_uri, packer_loc })
+  vim.o.runtimepath = fn.stdpath("data") .. "/site/pack/*/start/*," .. vim.o.runtimepath
 end
 
 --[[ AUTO-COMPILE ]]
@@ -171,6 +172,10 @@ return require("packer").startup({
         require("which-key").setup()
       end,
     })
+
+    if bootstrap_success then
+      require("packer").sync()
+    end
   end,
 
   --[[ custom initialization ]]
