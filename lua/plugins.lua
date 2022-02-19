@@ -56,13 +56,6 @@ return require("packer").startup({
       end,
     })
 
-    -- lsp installer
-    use({
-      "williamboman/nvim-lsp-installer",
-      opt = true,
-      event = { "BufReadPre", "BufNewFile" },
-    })
-
     -- lsp auto-complete
     use({
       "hrsh7th/nvim-compe",
