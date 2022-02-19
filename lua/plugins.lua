@@ -175,10 +175,10 @@ return require("packer").startup({
     })
   end,
 
-  --[[ CUSTOM PACKER CONFIGURATION ]]
-  ensure_dependencies = true,
-  transitive_disable = true,
+  --[[ custom initialization ]]
   config = {
+    ensure_dependencies = true,
+    transitive_disable = true,
     display = {
       open_fn = function()
         return require("packer.util").float({ border = "single" })
@@ -191,6 +191,6 @@ return require("packer").startup({
       header_sym = "─",
       show_all_info = true,
     },
+    log = { level = "warn" },
   },
-  log = { level = "warn" },
 })
