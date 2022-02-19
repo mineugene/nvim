@@ -48,8 +48,6 @@ return require("packer").startup({
     ]]
     use({
       "neovim/nvim-lspconfig",
-      opt = true,
-      after = "nvim-lsp-installer",
       config = function()
         require("post.lspconfig").config()
       end,
