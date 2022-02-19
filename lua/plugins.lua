@@ -72,6 +72,14 @@ return require("packer").startup({
       },
     })
 
+    -- lua language server
+    use({
+      "sumneko/lua-language-server",
+      opt = true,
+      ft = { "lua" },
+      run = require("post.lua-language-server").run(),
+    })
+
     -- python language server
     use({
       "deoplete-plugins/deoplete-jedi",

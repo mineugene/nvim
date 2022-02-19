@@ -1,65 +1,35 @@
 --[[
 -- File name:      lua/post/lspconfig.lua
--- Description:    post-processes for configuring nvim-lspconfig once it has
+-- Description:    post-processes for configuring language servers once it has
 --   been loaded. Servers are listed in the local my_servers table.
 ]]
 
+-- setup processing interface
+local Config = {}
 -- see :h lspconfig
 local nvim_lspconfig = require("lspconfig")
-local nvim_lspservers = require("nvim-lsp-installer.servers")
+local on_attach = require("post.lspconfig-common")
+local lua_lspbin = vim.fn.stdpath("data") .. "/site/pack/packer/opt/lua-language-server/bin/"
 
-local Config = {}
-local my_config
-
-local on_attach = function(_, bufnr)
-  -- stylua: ignore start
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  -- stylua: ignore end
-
-  -- completion triggered by ^X^O
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- keymap definitions
-  local keymap_opts = { noremap = true, silent = true }
-  local keymaps_n = {
-    ["gD"] = "<Cmd>lua vim.lsp.buf.declaration()<CR>",
-    ["K"] = "<Cmd>lua vim.lsp.buf.hover()<CR>",
-    ["<C-k>"] = "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
-    ["<Space>wa"] = "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-    ["<Space>wr"] = "<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-    ["<Space>wl"] = "<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-    ["<Space>D"] = "<Cmd>lua vim.lsp.buf.type_definition()<CR>",
-    ["<Space>rn"] = "<Cmd>lua vim.lsp.buf.rename()<CR>",
-    ["<Space>ca"] = "<Cmd>lua vim.lsp.buf.code_action()<CR>",
-    ["<Space>e"] = "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
-    ["[d"] = "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
-    ["]d"] = "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-    ["<Space>q"] = "<Cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",
-    ["<Space>f"] = "<Cmd>lua vim.lsp.buf.formatting()<CR>",
-  }
-  -- keymap processing
-  for m, cmd in pairs(keymaps_n) do
-    buf_set_keymap("n", m, cmd, keymap_opts)
-  end
-end
-
---[[ my_config(.ls_config | .ls_setup_args | .ls_setup_except)
--- ls_config:          manually installed language servers to setup
--- ls_setup_args:      default arguments to pass to all setup calls
--- ls_setup_except:    custom arguments to pass to a setup call
+--[[ setup_params(.common | .server_names | .except_params)
+-- common:          parameters to pass to all setup calls
+-- server_names:    manually installed language server names
+-- except_params:   custom arguments to be passed to setup calls
 ]]
-my_config = {
-  -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a
-  --   list of all supported configurable LSPs.
-  ls_config = {
-    "bashls",
-  },
-  ls_setup_args = {
+local setup_params = {
+  common = {
     on_attach = on_attach,
   },
-  ls_setup_except = {
+  server_names = {
+    "sumneko_lua",
+  },
+  except_params = {
     ["sumneko_lua"] = {
+      cmd = {
+        lua_lspbin .. "lua-language-server",
+        "-E",
+        lua_lspbin .. "main.lua",
+      },
       settings = {
         Lua = {
           runtime = {
@@ -83,23 +53,16 @@ function Config:create(o)
 
   self.__index = self
   o.config = function()
-    -- append installed language servers using nvim-lsp-installer
-    vim.list_extend(o.ls_config, nvim_lspservers.get_installed_server_names())
+    -- setup language servers
+    for _, ls in ipairs(o.server_names) do
+      local except = o.except_params[ls] or {}
+      local args = vim.tbl_extend("force", o.common, except)
 
-    for _, ls in ipairs(o.ls_config) do
-      local except = o.ls_setup_except[ls] or {}
-      local args = vim.tbl_extend("force", o.ls_setup_args, except)
-      -- lspconfig
       nvim_lspconfig[ls].setup(args)
-      -- lspinstall
-      local _, request = nvim_lspservers.get_server(ls)
-      request:on_ready(function()
-        request:setup(args)
-      end)
     end
   end
 
   return o
 end
 
-return Config:create(my_config)
+return Config:create(setup_params)
