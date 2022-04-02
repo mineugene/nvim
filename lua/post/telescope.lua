@@ -1,12 +1,4 @@
---[[
--- File name:      lua/post/telescope.lua
--- Description:    telescope configuation settings and customized methods.
-]]
---
-
-local Config = {}
--- see :h telescope.setup
-local my_config = {
+local settings = {
   defaults = {
     prompt_prefix = ":find ",
     selection_caret = "▐▶ ",
@@ -48,23 +40,10 @@ local my_config = {
   },
 }
 
-function Config:create(o)
-  o = o or {}
-  setmetatable(o, self)
+require("telescope").setup(settings)
 
-  o.config = function()
-    require("telescope").setup(o)
-  end
-
-  o.ls = function()
-    local builtin = require("telescope.builtin")
-    if os.execute("git rev-parse --is-inside-work-tree 1>/dev/null 2>&1") == 0 then
-      return builtin.git_files()
-    end
-    return builtin.find_files()
-  end
-
-  return o
-end
-
-return Config:create(my_config)
+-- local telescope_builtin = require("telescope.builtin")
+-- if os.execute("git rev-parse --is-inside-work-tree 1>/dev/null 2>&1") == 0 then
+-- return telescope_builtin.git_files()
+-- end
+-- return telescope_builtin.find_files()

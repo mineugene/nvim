@@ -4,32 +4,23 @@
 --   been loaded. Servers are listed in the local my_servers table.
 ]]
 
--- setup processing interface
-local Config = {}
--- see :h lspconfig
 local nvim_lspconfig = require("lspconfig")
-local on_attach = require("post.lspconfig-common")
-local lua_lspbin = vim.fn.stdpath("data") .. "/site/pack/packer/opt/lua-language-server/bin/"
 
---[[ setup_params(.common | .server_names | .except_params)
--- common:          parameters to pass to all setup calls
--- server_names:    manually installed language server names
+--[[ settings(.common | .server_names | .except_params)
+-- common:          common parameters to all setup calls
+-- server_names:    manually installed language servers
 -- except_params:   custom arguments to be passed to setup calls
 ]]
-local setup_params = {
+local settings = {
   common = {
-    on_attach = on_attach,
+    on_attach = require("post.lspconfig-common"),
   },
   server_names = {
     "sumneko_lua",
+    "vimls",
   },
   except_params = {
     ["sumneko_lua"] = {
-      cmd = {
-        lua_lspbin .. "lua-language-server",
-        "-E",
-        lua_lspbin .. "main.lua",
-      },
       settings = {
         Lua = {
           runtime = {
@@ -37,6 +28,10 @@ local setup_params = {
             path = vim.split(package.path, ";"),
           },
           diagnostics = {
+            enable = true,
+            disable = {
+              "different-requires",
+            },
             globals = { "vim" },
           },
           workspace = {},
@@ -47,22 +42,10 @@ local setup_params = {
   },
 }
 
-function Config:create(o)
-  o = o or {}
-  setmetatable(o, self)
+-- setup language servers
+for _, ls in ipairs(settings.server_names) do
+  local except = settings.except_params[ls] or {}
+  local args = vim.tbl_extend("force", settings.common, except)
 
-  self.__index = self
-  o.config = function()
-    -- setup language servers
-    for _, ls in ipairs(o.server_names) do
-      local except = o.except_params[ls] or {}
-      local args = vim.tbl_extend("force", o.common, except)
-
-      nvim_lspconfig[ls].setup(args)
-    end
-  end
-
-  return o
+  nvim_lspconfig[ls].setup(args)
 end
-
-return Config:create(setup_params)

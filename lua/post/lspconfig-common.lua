@@ -4,15 +4,8 @@
 ]]
 
 local on_attach = function(_, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
   -- completion triggered by ^X^O
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- keymap definitions
   local keymap_opts = { noremap = true, silent = true }
@@ -34,7 +27,7 @@ local on_attach = function(_, bufnr)
   }
   -- keymap processing
   for m, cmd in pairs(keymaps_n) do
-    buf_set_keymap("n", m, cmd, keymap_opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", m, cmd, keymap_opts)
   end
 end
 
