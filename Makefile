@@ -4,7 +4,7 @@ all: /usr/bin/nvim
 	/usr/bin/nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
 
 clean:
-	/usr/bin/rm -rf plugin/
+	/usr/bin/rm plugin/packer_compiled.lua
 
 lint: /usr/bin/which /usr/bin/luacheck
 	if /usr/bin/which stylua &>/dev/null; then stylua ${LUAFILES}; fi;
