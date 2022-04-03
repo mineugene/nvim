@@ -5,16 +5,15 @@
 --   post-configuation lua files (lua/post/).
 --]]
 
-local DEFAULT_OPTS = { silent = true, noremap = true }
-local keymaps_n = {
-  -- normal
-  ["\\"] = "<Cmd>split<CR><Cmd>exe 'resize '.(winheight(0)*3/5)<CR><Cmd>terminal<CR>",
-  ["<Leader>h"] = "<Cmd>nohls<CR>",
+local DEFAULT_OPTS = { noremap = true, buffer = true, silent = true }
+local nkeymaps = {
+  ["\\"] = "<Cmd>split | exe 'resize '.(winheight(0)*3/5)<CR><Cmd>terminal<CR>",
+  ["<Leader>h"] = "<Cmd>nohlsearch<CR>",
   -- telescope
   ["<Leader>gd"] = "<Cmd>Telescope lsp_definitions<CR>",
   ["<Leader>gi"] = "<Cmd>Telescope lsp_implementations<CR>",
   ["<Leader>gr"] = "<Cmd>Telescope lsp_references<CR>",
-  ["<Leader>ff"] = "<Cmd>lua require('post.telescope').ls()<CR>",
+  ["<Leader>ff"] = "<Cmd>Telescope find_files<CR>",
   ["<Leader>fb"] = "<Cmd>Telescope buffers<CR>",
   ["<Leader>fg"] = "<Cmd>Telescope live_grep<CR>",
   ["<Leader>fh"] = "<Cmd>Telescope help_tags<CR>",
@@ -24,6 +23,7 @@ local keymaps_n = {
 
 vim.g.mapleader = " "
 
-for cmd, map in pairs(keymaps_n) do
-  vim.api.nvim_set_keymap("n", cmd, map, DEFAULT_OPTS)
+local util = require("utility")
+for lhs, rhs in pairs(nkeymaps) do
+  util.keymap.set(util.mapmode.NORMAL, lhs, rhs, DEFAULT_OPTS)
 end
