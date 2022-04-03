@@ -6,8 +6,6 @@
   <img src="https://img.shields.io/github/languages/top/mineugene/nvim?style=flat-square&color=2C2D72" alt="top language badge" />
 </div>
 
-Written in lua
-
 ![nvim screenshot](https://user-images.githubusercontent.com/8313048/161401470-d2e27892-c3e4-4b0d-94e8-3c77883f2733.png)
 
 ## Install
