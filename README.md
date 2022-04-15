@@ -2,7 +2,7 @@
 
 <div style="display:block-inline;">
   <img src="https://img.shields.io/badge/Linux-%23.svg?style=flat-square&logo=linux&color=FCC624&logoColor=black" alt="Linux badge" />
-  <img src="https://img.shields.io/badge/Neovim-0.6.1-57A143.svg?style=flat-square&logo=Neovim&logoColor=57A143" alt="Neovim badge" />
+  <img src="https://img.shields.io/badge/Neovim-0.7.0-57A143.svg?style=flat-square&logo=Neovim&logoColor=57A143" alt="Neovim badge" />
   <img src="https://img.shields.io/github/languages/top/mineugene/nvim?style=flat-square&color=2C2D72" alt="top language badge" />
 </div>
 
@@ -14,7 +14,7 @@
 ### Pre-requisites
 
 #### Neovim
-  - ![neovim/neovim](https://github.com/neovim/neovim/releases/stable) >= 0.6.1
+  - ![neovim/neovim](https://github.com/neovim/neovim/releases/stable) >= 0.7.0
 
 #### Language Servers
   - ![sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/releases)
