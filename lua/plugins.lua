@@ -56,6 +56,12 @@ local plugins = {
       "typescriptreact",
     },
   },
+  ["windwp/nvim-autopairs"] = {
+    -- bracket/parenthese/quote pair auto-complete
+    config = function()
+      require("post.autopairs")
+    end,
+  },
   ["tpope/vim-surround"] = {
     -- motions to delete/change/add parentheses/quotes/XML-tags
   },

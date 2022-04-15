@@ -27,3 +27,11 @@ local settings = {
 }
 
 cmp.setup(settings)
+
+local util = require("utility")
+local autopairs_trigger = util.try_require("nvim-autopairs.completion.cmp").load()
+
+if autopairs_trigger then
+  -- autopair plugin setup
+  cmp.event:on("confirm_done", autopairs_trigger.on_confirm_done())
+end
