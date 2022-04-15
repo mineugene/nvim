@@ -18,6 +18,7 @@ local settings = {
   server_names = {
     "sumneko_lua",
     "vimls",
+    "pylsp",
   },
   except_params = {
     ["sumneko_lua"] = {
