@@ -91,8 +91,7 @@ Utility.api = {
     local bufnr = vim.api.nvim_create_buf(true, true)
     return bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
   end,
-  nvim_create_buf_term = function()
-    local bufnr = Utility.api.nvim_create_buf()
+  nvim_resize_win = function()
     local win_width, win_height = unpack(Utility.api.nvim_win_get_dim())
     local textwidth = vim.api.nvim_get_option("textwidth")
 
@@ -102,9 +101,10 @@ Utility.api = {
     else
       vim.cmd("split | resize " .. (win_height * 1 / 3)) -- split bottom-third
     end
-    -- enter terminal mode
+  end,
+  nvim_open_term = function(bufnr, cmd)
     vim.api.nvim_win_set_buf(0, bufnr)
-    vim.cmd("terminal")
+    vim.cmd("terminal " .. (cmd == nil and "" or cmd))
   end,
   nvim_win_get_dim = function()
     return {
