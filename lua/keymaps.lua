@@ -8,7 +8,7 @@
 local DEFAULT_OPTS = { noremap = true, silent = true }
 local util = require("utility")
 
-vim.g.mapleader = " "
+vim.g.mapleader = vim.api.nvim_replace_termcodes("<Space>", false, false, true)
 
 local function start_terminal()
   local bufnr = util.api.nvim_create_buf()
