@@ -85,4 +85,17 @@ Utility.keymap = {
   end,
 }
 
+Utility.api = {
+  nvim_create_buf = function()
+    local bufnr = vim.api.nvim_create_buf(true, true)
+    return bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+  end,
+  nvim_win_get_dim = function()
+    return {
+      vim.api.nvim_win_get_width(0),
+      vim.api.nvim_win_get_height(0),
+    }
+  end,
+}
+
 return Utility
