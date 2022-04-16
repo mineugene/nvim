@@ -79,6 +79,7 @@ Utility.mapmode = protect({
 Utility.keymap = {
   set = function(mode, lhs, rhs, opts)
     local bufnr = opts.buffer == true and 0 or opts.buffer
+    opts = vim.deepcopy(opts)
     opts.buffer = nil
 
     require("utility.keymap").setter(bufnr, mode, lhs, rhs, opts)
