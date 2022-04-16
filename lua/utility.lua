@@ -91,6 +91,21 @@ Utility.api = {
     local bufnr = vim.api.nvim_create_buf(true, true)
     return bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
   end,
+  nvim_create_buf_term = function()
+    local bufnr = Utility.api.nvim_create_buf()
+    local win_width, win_height = unpack(Utility.api.nvim_win_get_dim())
+    local textwidth = vim.api.nvim_get_option("textwidth")
+
+    textwidth = textwidth == 0 and 78 or textwidth
+    if win_height < win_width and win_width > 2 * (textwidth + 5) then
+      vim.cmd("vsplit") -- split right-half
+    else
+      vim.cmd("split | resize " .. (win_height * 1 / 3)) -- split bottom-third
+    end
+    -- enter terminal mode
+    vim.api.nvim_win_set_buf(0, bufnr)
+    vim.cmd("terminal")
+  end,
   nvim_win_get_dim = function()
     return {
       vim.api.nvim_win_get_width(0),

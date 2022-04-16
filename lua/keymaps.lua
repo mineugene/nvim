@@ -7,6 +7,7 @@
 
 local DEFAULT_OPTS = { noremap = true, silent = true }
 local nkeymaps = {
+  ["<Leader><Bslash>"] = require("utility").api.nvim_create_buf_term,
   ["<Leader>h"] = "<Cmd>nohlsearch<CR>",
   -- telescope
   ["<Leader>gd"] = "<Cmd>Telescope lsp_definitions<CR>",
@@ -26,21 +27,3 @@ local util = require("utility")
 for lhs, rhs in pairs(nkeymaps) do
   util.keymap.set(util.mapmode.NORMAL, lhs, rhs, DEFAULT_OPTS)
 end
-
-local function create_buf_term()
-  local bufnr = util.api.nvim_create_buf()
-  local win_width, win_height = unpack(util.api.nvim_win_get_dim())
-  local textwidth = vim.api.nvim_get_option("textwidth")
-
-  textwidth = textwidth == 0 and 78 or textwidth
-  if win_height < win_width and win_width > 2 * (textwidth + 5) then
-    vim.cmd("vsplit") -- split right-half
-  else
-    vim.cmd("split | resize " .. (win_height * 1 / 3)) -- split bottom-third
-  end
-  -- enter terminal mode
-  vim.api.nvim_win_set_buf(0, bufnr)
-  vim.cmd("terminal")
-end
-
-util.keymap.set(util.mapmode.NORMAL, "<Leader><Bslash>", create_buf_term, DEFAULT_OPTS)
