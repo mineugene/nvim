@@ -62,6 +62,13 @@ local plugins = {
       require("post.autopairs")
     end,
   },
+  ["phaazon/hop.nvim"] = {
+    -- cursor hop motions
+    branch = "v1",
+    config = function()
+      require("hop").setup()
+    end,
+  },
   ["tpope/vim-surround"] = {
     -- motions to delete/change/add parentheses/quotes/XML-tags
   },
