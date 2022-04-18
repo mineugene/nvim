@@ -137,6 +137,49 @@ Utility.keymap = {
   end,
 }
 
+---
+---Create or get an autocommand group |autocmd-groups|.
+---
+---[View documents](https://neovim.io/doc/user/api.html#nvim_create_augroup%28%29)
+---
+---@param o table Overrides.
+---@return table
+function Utility.augroup(o)
+  local _meta = {
+    ---
+    ---Create an |autocommand|.
+    ---
+    ---[View documents](https://neovim.io/doc/user/api.html#nvim_create_autocmd%28%29)
+    ---
+    ---@param event string|table
+    ---@param pattern string|table
+    ---@param command string|function
+    ---@param opts? table Override parameters.
+    au = function(event, pattern, command, opts)
+      opts = vim.tbl_extend("force", {
+        group = o.augroup_id,
+        pattern = pattern,
+      }, opts or {})
+      if type(command) == "string" then
+        opts.command = command
+      else
+        opts.callback = command
+      end
+      vim.api.nvim_create_autocmd(event, opts)
+      return o
+    end,
+  }
+
+  if type(o) == "string" then
+    local augroup_name = o
+    o = { augroup_name }
+  else
+    o = o or {}
+    o.augroup_id = vim.api.nvim_create_augroup(o[1], { clear = o.clear or true })
+  end
+  return setmetatable(o, { __index = _meta })
+end
+
 Utility.api = {
   ---
   ---Creates a new, empty, unnamed buffer.
