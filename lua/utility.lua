@@ -197,7 +197,7 @@ Utility.api = {
   ---For use with utility windows; should not be in the line of focus.
   nvim_resize_win = function()
     local win_width, win_height = unpack(Utility.api.nvim_win_get_dim())
-    local textwidth = vim.api.nvim_get_option("textwidth")
+    local textwidth = vim.api.nvim_get_option_value("textwidth", {})
 
     textwidth = textwidth == 0 and 78 or textwidth
     if win_height < win_width and win_width > 2 * (textwidth + 5) then
