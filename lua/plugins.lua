@@ -116,6 +116,9 @@ local plugins = {
 
 return require("packer").startup({
   function(use)
+    --[[ start-up optimizations ]]
+    use({ "lewis6991/impatient.nvim" })
+
     --[[ plugin manager
     -- `:help packer-introduction`
     ]]
