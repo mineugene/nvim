@@ -8,6 +8,7 @@ std = luajit
 ignore = {
   "122",
 }
+max_comment_line_length = false
 read_globals = {
   "vim",
 }
