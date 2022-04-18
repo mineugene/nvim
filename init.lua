@@ -9,8 +9,7 @@ util:bootstrap({
 vim.g.colorscheme = "tokyonight"
 
 --[ general configuration ]
-util.source.file_iter({ "autocommands.vim" })
-util.try_require({ "options", "keymaps" }).load()
+util.try_require({ "autocmd", "options", "keymaps" }).load()
 
 --[ plugins configuration ]
 util.try_require("impatient").load() -- recommended to load before plugins
