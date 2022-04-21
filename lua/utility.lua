@@ -27,18 +27,12 @@ end
 ---@param o string|table
 ---@return table base The same `Utility` instance to chain method calls.
 function Utility.try_require(o)
-  ---[[ BEGIN: extension to require() input signature
-  if type(o) == "table" or not o then
-    -- multiple modules to require()
-    o = o or {}
-  else
-    -- typical require() input signature
+  if type(o) == "string" then
     local sngl_modname = o
     o = { sngl_modname }
+  else
+    o = o or {} -- multiple modules to require()
   end
-  --[=[]] -- continue without type check
-  o = o or {}
-  -- END: extension to require() input signature ]=]
 
   local _meta = {
     ---
@@ -65,9 +59,7 @@ function Utility.try_require(o)
       until i > #mods
     end,
   }
-  return setmetatable(o, {
-    __index = _meta,
-  })
+  return setmetatable(o, { __index = _meta })
 end
 
 Utility.source = {
@@ -93,6 +85,8 @@ Utility.option = {
   ---
   ---Sets an `option` value. Passing 'nil' as `value` deletes the `option` (only works if there is a global fallback).
   ---
+  ---[View documents](https://neovim.io/doc/user/api.html#nvim_set_option%28%29)
+  ---
   ---@param option string
   ---@param value? string
   set = function(option, value)
@@ -107,7 +101,15 @@ Utility.option = {
       require("utility.option").setter(opt, val)
     end
   end,
-  lua_changed = require("utility.option").list_changed(),
+  ---
+  ---Get the option information for all changed options.
+  ---
+  ---This function returns a table of all changed options.
+  ---
+  ---@return table
+  lua_changed = function()
+    require("utility.option").list_changed()
+  end,
 }
 
 ---Enumeration for map-mode character representations
@@ -123,6 +125,8 @@ Utility.mapmode = protect({
 Utility.keymap = {
   ---
   ---Sets a |mapping| for the given `mode`.
+  ---
+  ---[View documents](https://neovim.io/doc/user/api.html#nvim_set_keymap%28%29)
   ---
   ---@param mode string
   ---@param lhs string
