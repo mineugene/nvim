@@ -7,4 +7,4 @@ endif
 let b:did_ftplugin = 1
 
 setlocal shiftwidth=4 tabstop=4 softtabstop=4
-setlocal noexpandtab
+setlocal expandtab

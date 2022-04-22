@@ -5,9 +5,18 @@
 --   post-configuation lua files (lua/post/).
 --]]
 
-local DEFAULT_OPTS = { noremap = true, buffer = true, silent = true }
+local DEFAULT_OPTS = { noremap = true, silent = true }
+local util = require("utility")
+
+vim.g.mapleader = vim.api.nvim_replace_termcodes("<Space>", false, false, true)
+
+local function start_terminal()
+  local bufnr = util.api.nvim_create_buf()
+  util.api.nvim_resize_win()
+  util.api.nvim_open_term(bufnr)
+end
 local nkeymaps = {
-  ["\\"] = "<Cmd>split | exe 'resize '.(winheight(0)*3/5)<CR><Cmd>terminal<CR>",
+  ["<C-Bslash><Bslash>"] = start_terminal,
   ["<Leader>h"] = "<Cmd>nohlsearch<CR>",
   -- telescope
   ["<Leader>gd"] = "<Cmd>Telescope lsp_definitions<CR>",
@@ -20,10 +29,6 @@ local nkeymaps = {
   -- context-commentstring
   ["<Leader>gc"] = "<Cmd>lua require('ts_context_commentstring.internal').update_commentstring()<CR>",
 }
-
-vim.g.mapleader = " "
-
-local util = require("utility")
 for lhs, rhs in pairs(nkeymaps) do
   util.keymap.set(util.mapmode.NORMAL, lhs, rhs, DEFAULT_OPTS)
 end

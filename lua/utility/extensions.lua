@@ -23,5 +23,6 @@ local _extend = function(base, key, val)
 end
 
 return {
+  nameof = _nameof,
   extend = _extend,
 }

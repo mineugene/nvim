@@ -14,6 +14,8 @@ let b:cc = executable("clang") ? "clang" : "gcc"
 let b:cflags = "-std=c11 -O3 -Wall"
 let b:src_file = expand("%:p")
 let b:obj_file = expand("%:p:r") . ".o"
+" lua-vim api extension
+let s:vim_api = luaeval('require("utility").api')
 
 " Compile single source file into an executable object file
 function! s:compile(cc, cflags, src, obj) abort
@@ -27,21 +29,8 @@ endfunction
 function! s:run(ofile) abort
   let l:obj = expand("%:p:r") . ".o"
 
-  call s:create_term_buffer()
-  execute "term " . printf("%s", a:ofile)
+  let bufnr = s:vim_api.nvim_create_buf()
+  call s:vim_api.nvim_resize_win()
+  call s:vim_api.nvim_open_term(bufnr, printf("%s", a:ofile))
   startinsert
-endfunction
-
-" Create a new split window, resized relative to the parent window size
-function! s:create_term_buffer() abort
-  let [w_height, w_width] = [winheight(0), winwidth(0)]
-  let l:textwidth = &l:textwidth != 0 ? &l:textwidth : 78
-
-  set splitbelow splitright
-  if w_height < w_width && w_width > (textwidth + 5)*2
-    vnew
-  else
-    new
-    execute "resize " . winheight(0)*3/5
-  endif
 endfunction

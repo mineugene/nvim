@@ -56,6 +56,19 @@ local plugins = {
       "typescriptreact",
     },
   },
+  ["windwp/nvim-autopairs"] = {
+    -- bracket/parenthese/quote pair auto-complete
+    config = function()
+      require("post.autopairs")
+    end,
+  },
+  ["phaazon/hop.nvim"] = {
+    -- cursor hop motions
+    branch = "v1",
+    config = function()
+      require("hop").setup()
+    end,
+  },
   ["tpope/vim-surround"] = {
     -- motions to delete/change/add parentheses/quotes/XML-tags
   },
@@ -86,9 +99,6 @@ local plugins = {
   },
   ["cocopon/iceberg.vim"] = {
     -- bluish color scheme
-    config = function()
-      require("post.colorscheme").set("iceberg")
-    end,
   },
   ["folke/tokyonight.nvim"] = {
     -- color scheme ported from Visual Studio Code TokyoNight theme
@@ -96,13 +106,15 @@ local plugins = {
       vim.g.tokyonight_style = "night"
       vim.g.tokyonight_italic_comments = false
       vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-      require("post.colorscheme").set("tokyonight")
     end,
   },
 }
 
 return require("packer").startup({
   function(use)
+    --[[ start-up optimizations ]]
+    use({ "lewis6991/impatient.nvim" })
+
     --[[ plugin manager
     -- `:help packer-introduction`
     ]]
