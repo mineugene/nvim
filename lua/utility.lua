@@ -58,6 +58,14 @@ function Utility.try_require(o)
         i = i + 1
       until i > #mods
     end,
+
+    is_loaded = function()
+      local all_exists = true
+      for _, mod in ipairs(o) do
+        all_exists = all_exists and require("utility.try").require(mod)
+      end
+      return all_exists
+    end,
   }
   return setmetatable(o, { __index = _meta })
 end
