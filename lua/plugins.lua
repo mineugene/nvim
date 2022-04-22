@@ -99,9 +99,6 @@ local plugins = {
   },
   ["cocopon/iceberg.vim"] = {
     -- bluish color scheme
-    config = function()
-      require("post.colorscheme").set("iceberg")
-    end,
   },
   ["folke/tokyonight.nvim"] = {
     -- color scheme ported from Visual Studio Code TokyoNight theme
@@ -109,7 +106,6 @@ local plugins = {
       vim.g.tokyonight_style = "night"
       vim.g.tokyonight_italic_comments = false
       vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-      require("post.colorscheme").set("tokyonight")
     end,
   },
 }
