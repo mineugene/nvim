@@ -11,9 +11,14 @@ local nvim_lspconfig = require("lspconfig")
 -- server_names:    manually installed language servers
 -- except_params:   custom arguments to be passed to setup calls
 ]]
+
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 local settings = {
   common = {
-    on_attach = require("post.lspconfig-common"),
+    on_attach = require("on-attach.lspconfig"),
   },
   server_names = {
     "sumneko_lua",
@@ -26,16 +31,18 @@ local settings = {
         Lua = {
           runtime = {
             version = "LuaJIT",
-            path = vim.split(package.path, ";"),
+            path = runtime_path,
           },
           diagnostics = {
             enable = true,
-            disable = {
-              "different-requires",
-            },
+            disable = { "different-requires", },
             globals = { "vim" },
           },
-          workspace = {},
+          workspace = {
+            library = { vim.api.nvim_get_runtime_file("", true) },
+            useGitIgnore = true,
+            checkThirdParty = false,
+          },
           telemetry = { enable = false },
         },
       },

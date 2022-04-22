@@ -3,13 +3,14 @@
 -- Description:    common utility functions to setup language servers
 ]]
 
+local util = require("utility")
 local on_attach = function(_, bufnr)
   -- completion triggered by ^X^O
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- keymap definitions
-  local keymap_opts = { noremap = true, silent = true }
-  local keymaps_n = {
+  local keymap_opts = { noremap = true, silent = true, buffer = true }
+  local nkeymaps = {
     ["gD"] = "<Cmd>lua vim.lsp.buf.declaration()<CR>",
     ["K"] = "<Cmd>lua vim.lsp.buf.hover()<CR>",
     ["<C-k>"] = "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
@@ -26,8 +27,8 @@ local on_attach = function(_, bufnr)
     ["<Space>f"] = "<Cmd>lua vim.lsp.buf.formatting()<CR>",
   }
   -- keymap processing
-  for m, cmd in pairs(keymaps_n) do
-    vim.api.nvim_buf_set_keymap(bufnr, "n", m, cmd, keymap_opts)
+  for lhs, rhs in pairs(nkeymaps) do
+    util.keymap.set(util.mapmode.NORMAL, lhs, rhs, keymap_opts)
   end
 end
 
