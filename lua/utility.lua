@@ -54,7 +54,7 @@ function Utility.try_require(o)
       local mods = { unpack(o) }
       local i = 1
       repeat
-        require("utility.try_configure")(mods[i], i == 1 and o.dependencies or {})
+        require("utility.try").configure(mods[i], i == 1 and o.dependencies or {})
         i = i + 1
       until i > #mods
     end,
