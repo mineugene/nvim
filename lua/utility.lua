@@ -1,7 +1,10 @@
+local fn = vim.fn
+local api = vim.api
 local protect = require("utility.extensions.protect")
 local Utility = {
-  packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim",
-  packer_runtime = vim.fn.stdpath("data") .. "/site/pack/*/start/*",
+  packer_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim",
+  packer_runtime = fn.stdpath("data") .. "/site/pack/*/start/*",
+  home_dir = api.nvim_eval(fn.shellescape(fn.fnamemodify("~", ":p")))
 }
 
 ---
@@ -173,7 +176,7 @@ function Utility.augroup(o)
       else
         opts.callback = command
       end
-      vim.api.nvim_create_autocmd(event, opts)
+      api.nvim_create_autocmd(event, opts)
       return o
     end,
   }
@@ -183,7 +186,7 @@ function Utility.augroup(o)
     o = { augroup_name }
   else
     o = o or {}
-    o.augroup_id = vim.api.nvim_create_augroup(o[1], { clear = o.clear or true })
+    o.augroup_id = api.nvim_create_augroup(o[1], { clear = o.clear or true })
   end
   return setmetatable(o, { __index = _meta })
 end
@@ -196,8 +199,8 @@ Utility.api = {
   ---
   ---@return number
   nvim_create_buf = function()
-    local bufnr = vim.api.nvim_create_buf(true, true)
-    return bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+    local bufnr = api.nvim_create_buf(true, true)
+    return bufnr == 0 and api.nvim_get_current_buf() or bufnr
   end,
   ---
   ---Resizes the current window in an opinionated fashion.
@@ -205,7 +208,7 @@ Utility.api = {
   ---For use with utility windows; should not be in the line of focus.
   nvim_resize_win = function()
     local win_width, win_height = unpack(Utility.api.nvim_win_get_dim())
-    local textwidth = vim.api.nvim_get_option_value("textwidth", {})
+    local textwidth = api.nvim_get_option_value("textwidth", {})
 
     textwidth = textwidth == 0 and 78 or textwidth
     if win_height < win_width and win_width > 2 * (textwidth + 5) then
@@ -222,7 +225,7 @@ Utility.api = {
   ---@param bufnr number Empty buffer expected.
   ---@param cmd? string Shell command.
   nvim_open_term = function(bufnr, cmd)
-    vim.api.nvim_win_set_buf(0, bufnr)
+    api.nvim_win_set_buf(0, bufnr)
     vim.cmd("terminal " .. (cmd == nil and "" or cmd))
   end,
   ---
@@ -231,8 +234,8 @@ Utility.api = {
   ---@return table tuple
   nvim_win_get_dim = function()
     return {
-      vim.api.nvim_win_get_width(0),
-      vim.api.nvim_win_get_height(0),
+      api.nvim_win_get_width(0),
+      api.nvim_win_get_height(0),
     }
   end,
 }
