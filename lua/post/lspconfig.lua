@@ -4,6 +4,7 @@
 --   been loaded. Servers are listed in the local my_servers table.
 ]]
 
+local util = require("utility")
 local nvim_lspconfig = require("lspconfig")
 
 --[[ settings(.common | .server_names | .except_params)
@@ -15,6 +16,8 @@ local nvim_lspconfig = require("lspconfig")
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
+local omnisharp_bin = util.home_dir .. ".local/omnisharp/OmniSharp"
+local pid_nvim = vim.fn.getpid()
 
 local settings = {
   common = {
@@ -23,6 +26,7 @@ local settings = {
   server_names = {
     "sumneko_lua",
     "vimls",
+    "omnisharp",
     "pylsp",
   },
   except_params = {
@@ -47,6 +51,9 @@ local settings = {
         },
       },
     },
+    ["omnisharp"] = {
+      cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid_nvim) }
+    }
   },
 }
 
