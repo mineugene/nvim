@@ -138,7 +138,7 @@ return require("packer").startup({
       removed_sym = "-",
       moved_sym = "~",
       header_sym = "─",
-      show_all_info = true,
+      show_all_info = false,
     },
     log = { level = "warn" },
   },
