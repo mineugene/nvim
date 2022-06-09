@@ -24,8 +24,6 @@ local settings = {
     "markdown",
     "ninja",
     "perl",
-    "php",
-    "phpdoc",
     "python",
     "regex",
     "rust",
